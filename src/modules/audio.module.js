@@ -1,4 +1,5 @@
 import {Module} from '../core/module'
+import {random} from '../utils'
 
 export class AudioModule extends Module {
     constructor(type, text) {
@@ -10,16 +11,11 @@ export class AudioModule extends Module {
     }
 
     trigger() {
-        const numberMusic = this.getRandomInt (1, 4)
+        const numberMusic = random(1, 4);
         const audio = new Audio(`../src/music/${numberMusic}.wav`);
         audio.play();
-  }
-
-    getRandomInt(min, max) {  
-    min = Math.ceil(min);  
-    max = Math.floor(max);  
-    return Math.floor(Math.random() * (max - min + 1)) + min;  
-} 
-
+        console.log (audio)
+        setTimeout (() => audio.load(), 2000)
+  } 
 
 }
