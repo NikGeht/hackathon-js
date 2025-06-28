@@ -4,12 +4,14 @@ export class ClicksModule extends Module {
     constructor(type, text) {
         super(type, text);
         this.countClicks = 0;
+        this.isTracking = false;
         this.countClicksDbl = 0;
         this.timeDuration= 3000;
         this.bindedHandleClick = this.handleClick.bind(this);
     }
 
     trigger() {
+        if (this.isTracking) return
         this.startTime = Date.now();
         this.startTracking();
         setTimeout(() => {
@@ -38,15 +40,23 @@ export class ClicksModule extends Module {
     }
 
     startTracking() {
+        this.isTracking = true;
+        this.countClicks = 0;
+        this.countClicksDbl = 0;
         document.addEventListener('click', this.bindedHandleClick);
         document.addEventListener('dblclick', this.bindedHandleClick);
     }
 
     endTracking() {
+        this.isTracking = false;
         this.endTime = Date.now();
         this.displayStats();
-        document.removeEventListener('click', this.bindedHandleClick);
-        document.removeEventListener('dblclick', this.bindedHandleClick);
+        try {
+            document.removeEventListener('click', this.bindedHandleClick);
+            document.removeEventListener('dblclick', this.bindedHandleClick);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     createStats() {
