@@ -40,7 +40,7 @@ export class ContextMenu extends Menu {
 
     handleClick(event) {
         if (event.target.classList.contains('menu-item')) {
-            this.modules.find(module => module.type === event.target.dataset.type).trigger()
+            this.modules.find(module => module.type === event.target.dataset.type)?.trigger()
         }
     }
 
