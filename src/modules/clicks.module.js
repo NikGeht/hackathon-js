@@ -7,6 +7,8 @@ export class ClicksModule extends Module {
         this.isTracking = false;
         this.countClicksDbl = 0;
         this.timeDuration= 3000;
+        this.timerInterval = null;
+        this.timerElement = null;
         this.bindedHandleClick = this.handleClick.bind(this);
     }
 
@@ -35,11 +37,29 @@ export class ClicksModule extends Module {
         }, 5000)
     }
 
+    displayTimer() {
+        this.timerElement = this.createTimer();
+        document.body.append(this.timerElement);
+
+        let timeDuration = this.timeDuration;
+        this.timerInterval = setInterval(() => {
+            timeDuration -= 1000;
+            this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(timeDuration) / 1000}`;
+            
+            if (timeDuration <= 0) {
+                clearInterval(this.timerInterval);
+                return;
+            }
+        }, 1000)
+            
+    }
+
     toHTML() {
         return `<li class="menu-item" data-type="${this.type}">${this.text}</li>`;
     }
 
     startTracking() {
+        this.displayTimer();
         this.isTracking = true;
         this.countClicks = 0;
         this.countClicksDbl = 0;
@@ -49,9 +69,13 @@ export class ClicksModule extends Module {
 
     endTracking() {
         this.isTracking = false;
+        this.timerElement.remove();
         this.endTime = Date.now();
         this.displayStats();
         try {
+            if (this.timerInterval) {
+                clearInterval(this.timerInterval);
+            }
             document.removeEventListener('click', this.bindedHandleClick);
             document.removeEventListener('dblclick', this.bindedHandleClick);
         } catch (error) {
@@ -70,5 +94,19 @@ export class ClicksModule extends Module {
         statsContainer.append(clicksStats);
         
         return statsContainer;
+    }
+
+    createTimer() {
+        const timerContainer = document.createElement('div');
+        timerContainer.className = 'timer-container';
+        const timerHeader = document.createElement('h3');
+        timerHeader.className = 'timer-container__header';
+        timerHeader.textContent = 'Таймер';
+        const timer = document.createElement('span');
+        timer.className = 'timer-container__timer';
+        timer.textContent = `Времени осталось: ${this.timeDuration / 1000}`;
+
+        timerContainer.append(timerHeader, timer);
+        return timerContainer;
     }
 }
