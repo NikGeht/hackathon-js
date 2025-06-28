@@ -22,11 +22,13 @@ export class ContextMenu extends Menu {
     add(modules) {
         this.modules.push(...modules)
         this.#render()
-        console.log(this.modules)
     }
 
     #render() {
-        this.rootContext.innerHTML = this.modules.map(module => module.toHTML()).join('');
+        this.rootContext.innerHTML = '';
+        for (const module of this.modules) {
+            this.rootContext.innerHTML += module.toHTML();
+        } 
     }
     
     bind() {
