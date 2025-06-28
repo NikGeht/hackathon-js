@@ -1,13 +1,14 @@
-import './styles.css'
-import {ContextMenu} from './menu'
-import {TestModule} from './modules/test.module'
-import {ClicksModule} from './modules/clicks.module'
-import {ShapeModule} from './modules/shape.module'
-import { BackgroundModule } from './modules/background.module'
+import "./styles.css";
+import { ContextMenu } from "./menu";
+import { ClicksModule } from "./modules/clicks.module";
+import { ShapeModule } from "./modules/shape.module";
+import { BackgroundModule } from "./modules/background.module";
 
-const menu = new ContextMenu('#menu')
+import { CustomMessageModule } from "./modules/customMessageModule";
 
-menu.add(new ClicksModule('clicks', 'Счетчик кликов за последние 3 секунды'))
-menu.add(new ShapeModule('shape', 'Форма'))
-menu.add(new BackgroundModule('background', 'Фоновый цвет'))
-menu.add(new TestModule('test1', 'Test 1'))
+const menu = new ContextMenu("#menu");
+
+menu.add(new CustomMessageModule("custom-message", "Кастомное сообщение"));
+menu.add(new ClicksModule("clicks", "Счетчик кликов"));
+menu.add(new ShapeModule("shape", "Случайная фигура"));
+menu.add(new BackgroundModule("background", "Случайный фон"));
