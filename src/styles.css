@@ -107,3 +107,9 @@ body {
   transform: scale(1.2);
   border: 2px solid #000000;
 }
+
+.shape {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+}
