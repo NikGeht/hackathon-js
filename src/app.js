@@ -15,12 +15,6 @@ const menu = new ContextMenu('#menu');
 menu.add(new ClicksModule('clicks', 'Счетчик кликов за последние 3 секунды'));
 menu.add(new ShapeModule('shape', 'Форма'));
 menu.add(new BackgroundModule('background', 'Фоновый цвет'));
-
-menu.add(new TestModule('test1', 'Test 1'));
-
-menu.add(new ClicksModule('clicks', 'Счетчик кликов за последние 3 секунды'));
-menu.add(new ShapeModule('shape', 'Форма'));
-menu.add(new BackgroundModule('background', 'Фоновый цвет'));
 menu.add(new AudioModule('audio', 'Рандомный звук'));
 menu.add(new CountdownTimerModule('timer', 'Таймер'));
 
