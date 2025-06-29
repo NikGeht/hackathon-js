@@ -40,7 +40,7 @@ export class ClicksModule extends Module {
     displayTimer() {
         this.timerElement = this.createTimer();
         document.body.append(this.timerElement);
-        this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(timeDuration) / 1000}`;
+        this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(this.timeDuration) / 1000}`;
         
         this.timerElement.classList.remove('timer-container--warning', 'timer-container--danger');
         let timeDuration = this.timeDuration;
@@ -71,8 +71,8 @@ export class ClicksModule extends Module {
         return `<li class="menu-item" data-type="${this.type}">${this.text}</li>`;
     }
 
-    async startTracking() {
-        await this.displayTimer();
+    startTracking() {
+        this.displayTimer();
         this.isTracking = true;
         this.countClicks = 0;
         this.countClicksDbl = 0;
