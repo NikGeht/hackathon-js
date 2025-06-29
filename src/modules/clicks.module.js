@@ -18,7 +18,7 @@ export class ClicksModule extends Module {
         this.startTracking();
         setTimeout(() => {
             this.endTracking();
-        }, this.timeDuration)
+        }, this.timeDuration + 1000)
     }
 
     handleClick(event) {
@@ -40,13 +40,26 @@ export class ClicksModule extends Module {
     displayTimer() {
         this.timerElement = this.createTimer();
         document.body.append(this.timerElement);
-
+        this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(timeDuration) / 1000}`;
+        
+        this.timerElement.classList.remove('timer-container--warning', 'timer-container--danger');
         let timeDuration = this.timeDuration;
         this.timerInterval = setInterval(() => {
-            timeDuration -= 1000;
-            this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(timeDuration) / 1000}`;
+            console.log(timeDuration)
+            if (timeDuration > 2000) {
+                this.timerElement.classList.add('timer-container--normal');
+            }
+            else if (timeDuration > 1000) {
+                this.timerElement.classList.add('timer-container--warning');
+            } else {
+                this.timerElement.classList.add('timer-container--danger');
+            }
+
             
-            if (timeDuration <= 0) {
+            this.timerElement.querySelector('.timer-container__timer').textContent = `Времени осталось: ${(timeDuration) / 1000}`;
+            timeDuration -= 1000;
+            
+            if (timeDuration < 0) {
                 clearInterval(this.timerInterval);
                 return;
             }
@@ -58,8 +71,8 @@ export class ClicksModule extends Module {
         return `<li class="menu-item" data-type="${this.type}">${this.text}</li>`;
     }
 
-    startTracking() {
-        this.displayTimer();
+    async startTracking() {
+        await this.displayTimer();
         this.isTracking = true;
         this.countClicks = 0;
         this.countClicksDbl = 0;
@@ -99,12 +112,12 @@ export class ClicksModule extends Module {
     createTimer() {
         const timerContainer = document.createElement('div');
         timerContainer.className = 'timer-container';
+        timerContainer.classList.add('timer-container--normal');
         const timerHeader = document.createElement('h3');
         timerHeader.className = 'timer-container__header';
         timerHeader.textContent = 'Таймер';
         const timer = document.createElement('span');
         timer.className = 'timer-container__timer';
-        timer.textContent = `Времени осталось: ${this.timeDuration / 1000}`;
 
         timerContainer.append(timerHeader, timer);
         return timerContainer;
