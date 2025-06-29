@@ -38,8 +38,31 @@ body {
 }
 
 .menu .menu-item:hover {
-  background: #343434;
+    background: #343434;
 }
+
+.clicks-stats, .timer-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-family: Arial, sans-serif;
+    min-width: 250px;
+}
+
+.timer-container__header {
+    color: #424242;
+}
+
+.timer-container--normal { color: #4CAF50; }
+.timer-container--warning { color: #FF9800; }
+.timer-container--danger { color: #F44336; }
 
 .countdown-timer {
   position: fixed;
