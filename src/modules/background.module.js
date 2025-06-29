@@ -1,6 +1,7 @@
 //================<Свистелки в наличии>==================
 
 import { Module } from '../core/module';
+import { randomColor } from '../utils';
 
 export class BackgroundModule extends Module {
   constructor(type, text) {
@@ -9,14 +10,6 @@ export class BackgroundModule extends Module {
     this.colorsPanel = null;
   }
 
-  getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
   saveCurrentColor() {
     const currentColor = document.body.style.backgroundColor || '#ffffff';
@@ -80,7 +73,7 @@ export class BackgroundModule extends Module {
       this.initColorsPanel();
     }
 
-    const color = this.getRandomColor();
+    const color = randomColor();
     document.body.style.backgroundColor = color;
   }
 }
