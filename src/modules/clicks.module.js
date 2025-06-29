@@ -1,6 +1,7 @@
-import {Module} from '../core/module'
+import { Module } from '../core/module';
 
 export class ClicksModule extends Module {
+
     constructor(type, text) {
         super(type, text);
         this.countClicks = 0;
@@ -21,22 +22,21 @@ export class ClicksModule extends Module {
         }, this.timeDuration + 1000)
     }
 
-    handleClick(event) {
-        if (event.type === 'click') {
-            this.countClicks++;
-        } else if (event.type === 'dblclick') {
-            this.countClicksDbl++;
-        }
+  handleClick(event) {
+    if (event.type === 'click') {
+      this.countClicks++;
+    } else if (event.type === 'dblclick') {
+      this.countClicksDbl++;
     }
+  }
 
-    displayStats() {
-        const clicks = this.createStats();
-        document.body.append(clicks);
-        setTimeout(() => {
-            clicks.remove();
-        }, 5000)
-    }
-
+  displayStats() {
+    const clicks = this.createStats();
+    document.body.append(clicks);
+    setTimeout(() => {
+      clicks.remove();
+    }, 5000);
+  }
     displayTimer() {
         this.timerElement = this.createTimer();
         document.body.append(this.timerElement);
