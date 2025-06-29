@@ -81,8 +81,8 @@ export class ShapeModule extends Module {
     }
 
     getRandomPosition(shapeElement) {
-        let shapeTop = random(0, window.innerHeight - shapeElement.offsetHeight);
-        let shapeLeft = random(0, window.innerWidth - shapeElement.offsetWidth);
+        let shapeTop = random(0, window.innerHeight - shapeElement.offsetHeight - 200);
+        let shapeLeft = random(0, window.innerWidth - shapeElement.offsetWidth - 200);
         if (shapeTop + shapeElement.offsetHeight > window.innerHeight) {
             shapeTop = shapeTop - shapeElement.offsetHeight;
         }
