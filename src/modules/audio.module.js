@@ -14,7 +14,6 @@ export class AudioModule extends Module {
         const numberMusic = random(1, 4);
         const audio = new Audio(`../src/music/${numberMusic}.wav`);
         audio.play();
-        console.log (audio)
         setTimeout (() => audio.load(), 2000)
   } 
 
