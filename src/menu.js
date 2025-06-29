@@ -12,8 +12,7 @@ export class ContextMenu extends Menu {
         event.preventDefault();
         this.#render()
         this.el.classList.add('open');
-        this.el.style.top = `${event.clientY}px`
-        this.el.style.left = `${event.clientX}px`
+        this.#calculatePosition(event);
     }
     
     close() {
@@ -24,6 +23,23 @@ export class ContextMenu extends Menu {
         if (module instanceof Module) {
             this.modules.push(module)
         }
+    }
+    
+    #calculatePosition(event) {
+        let X = event.clientX;
+        let Y = event.clientY;
+        const contextWidth = this.el.offsetWidth;
+        const contextHeight = this.el.offsetHeight;
+        const windowWidth = window.innerWidth - 10;
+        const windowHeight = window.innerHeight - 10;
+        if (event.clientX + contextWidth > windowWidth) {
+            X = X - contextWidth;
+        }
+        if (event.clientY + contextHeight > windowHeight) {
+            Y = Y - contextHeight;
+        }
+        this.el.style.top = `${Y}px`
+        this.el.style.left = `${X}px`
     }
 
     #render() {
